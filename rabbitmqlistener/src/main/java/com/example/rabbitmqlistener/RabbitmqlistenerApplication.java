@@ -9,5 +9,7 @@ public class RabbitmqlistenerApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(RabbitmqlistenerApplication.class, args);
 	}
+	{
+	}
 
 }
