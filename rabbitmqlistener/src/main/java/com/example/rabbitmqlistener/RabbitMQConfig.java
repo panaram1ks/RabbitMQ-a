@@ -1,6 +1,6 @@
 package com.example.rabbitmqlistener;
 
-import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.*;
 
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -35,6 +35,23 @@ public class RabbitMQConfig {
         smlc.setQueues(myQueue());
         smlc.setMessageListener(new RabbitMQMessageListener());
         return smlc;
+    }
+
+    @Bean
+    Exchange myExchange() {
+        return ExchangeBuilder.topicExchange("MyTopicExchange")
+                .durable(true)
+                .build();
+    }
+
+    @Bean
+    Binding binding() {
+        // return new Binding(MY_QUEUE, Binding.DestinationType.QUEUE, "MyTopicExchang", "topic", null);
+        return BindingBuilder
+                .bind(myQueue())
+                .to(myExchange())
+                .with("topic")
+                .noargs();
     }
 
 }
