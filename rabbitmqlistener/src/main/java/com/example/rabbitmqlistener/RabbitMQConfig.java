@@ -21,7 +21,7 @@ public class RabbitMQConfig {
     }
 
     @Bean
-    ConnectionFactory connectionFactory(){
+    ConnectionFactory connectionFactory() {
         CachingConnectionFactory connectionFactory = new CachingConnectionFactory("localhost");
         connectionFactory.setUsername("rmuser");
         connectionFactory.setPassword("rmpassword");
@@ -29,7 +29,7 @@ public class RabbitMQConfig {
     }
 
     @Bean
-    MessageListenerContainer messageListenerContainer(){
+    MessageListenerContainer messageListenerContainer() {
         SimpleMessageListenerContainer smlc = new SimpleMessageListenerContainer();
         smlc.setConnectionFactory(connectionFactory());
         smlc.setQueues(myQueue());
