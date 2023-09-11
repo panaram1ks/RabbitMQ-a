@@ -21,6 +21,12 @@ public class RabbitmqdemoApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 //		rabbitTemplate.convertAndSend("Hello from our first message!");
-        rabbitTemplate.convertAndSend("TestExchange", "testRouting", "Hello from code");
+
+        SimpleMessage sm = new SimpleMessage();
+        sm.setName("FirstMessage");
+        sm.setDescription("FirstDescription");
+
+//        rabbitTemplate.convertAndSend("TestExchange", "testRouting", "Hello from code");
+        rabbitTemplate.convertAndSend("TestExchange", "testRouting", sm);
     }
 }
