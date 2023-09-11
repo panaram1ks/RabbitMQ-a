@@ -23,10 +23,19 @@ public class RabbitMQExchangeConfiguration {
     }
 
     @Bean
-    Exchange newExchange(){
+    Exchange newExchange() {
         return ExchangeBuilder.topicExchange("TopicTestExchange")
                 .autoDelete()
                 .durable(true)
+                .internal()
+                .build();
+    }
+
+    @Bean
+    Exchange fanoutExchange() {
+        return ExchangeBuilder.fanoutExchange("FanoutTestExchange")
+                .autoDelete()
+                .durable(false)
                 .internal()
                 .build();
     }
