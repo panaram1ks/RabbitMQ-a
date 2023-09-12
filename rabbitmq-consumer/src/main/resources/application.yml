@@ -1,0 +1,6 @@
+spring:
+  rabbitmq:
+    addresses: localhost:5672
+    username: rmuser
+    password: rmpassword
+
