@@ -1,7 +1,7 @@
 package com.course.rabbitmqproducer;
 
 import com.course.rabbitmqproducer.entity.Employee;
-import com.course.rabbitmqproducer.producer.EmployeeJsonProducer;
+import com.course.rabbitmqproducer.producer.HumanResourceProducer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 public class RabbitmqProducerApplication implements CommandLineRunner {
 
-    private final EmployeeJsonProducer producer;
+    private final HumanResourceProducer producer;
 
     public static void main(String[] args) {
         SpringApplication.run(RabbitmqProducerApplication.class, args);
