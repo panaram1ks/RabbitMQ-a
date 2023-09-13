@@ -1,6 +1,6 @@
 package com.course.rabbitmqconsumer.consumer;
 
-import com.course.rabbitmqconsumer.entity.Employee;
+import com.course.rabbitmqconsumer.entity.Picture;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,19 +10,19 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
-//@Service
-public class MarketingConsumer {
+@Service
+public class PictureImageConsumer {
 
     @Autowired
     private ObjectMapper objectMapper;
 
-    private static final Logger LOG = LoggerFactory.getLogger(MarketingConsumer.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PictureImageConsumer.class);
 
-    @RabbitListener(queues = "q.hr.marketing")
+    @RabbitListener(queues = "q.picture.image")
     public void listen(String message) throws IOException {
-        var employee = objectMapper.readValue(message, Employee.class);
+        var picture = objectMapper.readValue(message, Picture.class);
 
-        LOG.info("Employee on Marketing is {}", employee);
+        LOG.info("Picture type:{} , consumer:{}", picture.getType(), PictureImageConsumer.class.getSimpleName());
     }
 
 }
