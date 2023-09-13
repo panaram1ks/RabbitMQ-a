@@ -10,19 +10,19 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
-//@Service
-public class EmployeeJsonConsumer {
+@Service
+public class AccountingConsumer {
 
     @Autowired
     private ObjectMapper objectMapper;
 
-    private static final Logger LOG = LoggerFactory.getLogger(EmployeeJsonConsumer.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AccountingConsumer.class);
 
-    @RabbitListener(queues = "course.employee")
+    @RabbitListener(queues = "q.hr.accounting")
     public void listen(String message) throws IOException {
         var employee = objectMapper.readValue(message, Employee.class);
 
-        LOG.info("Employee is {}", employee);
+        LOG.info("Employee on Accounting is {}", employee);
     }
 
 }
