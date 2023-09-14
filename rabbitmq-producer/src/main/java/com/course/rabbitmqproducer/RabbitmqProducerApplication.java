@@ -2,6 +2,7 @@ package com.course.rabbitmqproducer;
 
 import com.course.rabbitmqproducer.entity.Picture;
 import com.course.rabbitmqproducer.producer.MyPictureProducer;
+import com.course.rabbitmqproducer.producer.RetryPictureProducer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -16,7 +17,7 @@ import java.util.concurrent.ThreadLocalRandom;
 @RequiredArgsConstructor
 public class RabbitmqProducerApplication implements CommandLineRunner {
 
-    private final MyPictureProducer producer;
+    private final RetryPictureProducer producer;
 
     public static void main(String[] args) {
         SpringApplication.run(RabbitmqProducerApplication.class, args);
@@ -44,10 +45,10 @@ public class RabbitmqProducerApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 10; i++) {
             Picture picture = new Picture();
             picture.setName("Picture " + i);
-            picture.setSize(ThreadLocalRandom.current().nextLong(9000, 10000));
+            picture.setSize(ThreadLocalRandom.current().nextLong(9500, 10000));
             picture.setSource(SOURCES.get(i % SOURCES.size()));
             picture.setType(TYPES.get(i % TYPES.size()));
 

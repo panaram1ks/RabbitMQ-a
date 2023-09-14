@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 
 @Slf4j
-//@Service
-public class MyPictureProducer {
+@Service
+public class RetryPictureProducer {
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -21,7 +21,7 @@ public class MyPictureProducer {
     public void sendMessage(Picture picture) throws IOException {
         var json = objectMapper.writeValueAsString(picture);
 
-        rabbitTemplate.convertAndSend("x.mypicture", picture.getType(), json);
+        rabbitTemplate.convertAndSend("x.guideline.work", picture.getType(), json);
     }
 
 }
