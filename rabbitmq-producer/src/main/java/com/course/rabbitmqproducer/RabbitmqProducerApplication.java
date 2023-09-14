@@ -20,26 +20,31 @@ import java.util.concurrent.ThreadLocalRandom;
 @RequiredArgsConstructor
 public class RabbitmqProducerApplication implements CommandLineRunner {
 
-    private final RetryEmployeeProducer producer;
+//    private final RetryEmployeeProducer producer;
 
     public static void main(String[] args) {
         SpringApplication.run(RabbitmqProducerApplication.class, args);
     }
 
-    private final List<String> COLORS = List.of("white", "red", "green");
-    private final List<String> MATERIALS = List.of("wood", "plastic", "steel");
-
-    private final List<String> SOURCES = List.of("mobile", "web");
-    private final List<String> TYPES = List.of("jpg", "png", "svg");
+//    private final List<String> COLORS = List.of("white", "red", "green");
+//    private final List<String> MATERIALS = List.of("wood", "plastic", "steel");
+//
+//    private final List<String> SOURCES = List.of("mobile", "web");
+//    private final List<String> TYPES = List.of("jpg", "png", "svg");
 
     @Override
     public void run(String... args) throws Exception {
-        for (int i = 0; i < 10; i++) {
-            var employee = new Employee("emp " + i, null, LocalDate.now());
 
-            producer.sendMessage(employee);
-        }
     }
+
+//    @Override
+//    public void run(String... args) throws Exception {
+//        for (int i = 0; i < 10; i++) {
+//            var employee = new Employee("emp " + i, null, LocalDate.now());
+//
+//            producer.sendMessage(employee);
+//        }
+//    }
 
 //    @Override
 //    public void run(String... args) throws Exception {
