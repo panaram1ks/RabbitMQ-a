@@ -3,4 +3,7 @@ spring:
     addresses: localhost:5672
     username: rmuser
     password: rmpassword
+    listener:
+      simple:
+        acknowledge-mode: manual
 
