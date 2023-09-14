@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 
 @Slf4j
-@Service
+//@Service
 public class SpringPictureProducer {
 
     @Autowired
