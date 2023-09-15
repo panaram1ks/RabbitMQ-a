@@ -2,6 +2,7 @@ package com.parom.rabbitmq.two;
 
 import com.parom.rabbitmq.two.entity.DummyMessage;
 import com.parom.rabbitmq.two.entity.InvoiceCancelledMessage;
+import com.parom.rabbitmq.two.producer.AnotherDummyProducer;
 import com.parom.rabbitmq.two.producer.InvoiceProducer;
 import com.parom.rabbitmq.two.producer.ReliableProducer;
 import com.parom.rabbitmq.two.producer.SingleActiveProducer;
@@ -18,7 +19,7 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 public class Application implements CommandLineRunner {
 
-    private final InvoiceProducer producer;
+    private final AnotherDummyProducer producer;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -26,11 +27,8 @@ public class Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        for (int i = 0; i < 10; i++) {
-            var invoiceNumber = "INV-" + i;
-            var invoiceCancelledMessage = new InvoiceCancelledMessage(LocalDate.now(), invoiceNumber, "Test " + i);
-            producer.sendInvoiceCancelled(invoiceCancelledMessage);
-        }
+        var dummyMessage = new DummyMessage("Just a dummy message", 1);
+        producer.sendDummy(dummyMessage);
         log.info("Done");
     }
 
