@@ -1,5 +1,6 @@
 package com.parom.rabbitmq.two.producer;
 
+import com.parom.rabbitmq.two.entity.InvoiceCancelledMessage;
 import com.parom.rabbitmq.two.entity.InvoiceCreatedMessage;
 import com.parom.rabbitmq.two.entity.InvoicePaidMessage;
 import lombok.Value;
@@ -19,6 +20,10 @@ public class InvoiceProducer {
     }
 
     public void sendInvoicePaid(InvoicePaidMessage message) {
+        rabbitTemplate.convertAndSend(EXCHANGE, "", message);
+    }
+
+    public void sendInvoiceCancelled(InvoiceCancelledMessage message) {
         rabbitTemplate.convertAndSend(EXCHANGE, "", message);
     }
 

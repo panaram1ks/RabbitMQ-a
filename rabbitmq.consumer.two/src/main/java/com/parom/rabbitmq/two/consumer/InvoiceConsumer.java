@@ -21,4 +21,9 @@ public class InvoiceConsumer {
     public void handleInvoicePaid(InvoicePaidMessage message) {
         log.info("Invoice paid : {}", message);
     }
+
+    @RabbitHandler(isDefault = true)
+    public void handleDefault(Object message) {
+        log.info("Handling default : {}", message);
+    }
 }
