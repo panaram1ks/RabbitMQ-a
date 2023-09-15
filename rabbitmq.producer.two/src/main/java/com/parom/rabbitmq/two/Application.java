@@ -1,24 +1,18 @@
 package com.parom.rabbitmq.two;
 
-import com.parom.rabbitmq.two.entity.InvoiceCancelledMessage;
-import com.parom.rabbitmq.two.entity.InvoiceCreatedMessage;
-import com.parom.rabbitmq.two.entity.InvoicePaidMessage;
-import com.parom.rabbitmq.two.producer.InvoiceProducer;
+import com.parom.rabbitmq.two.producer.SingleActiveProducer;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.time.LocalDate;
-import java.util.concurrent.ThreadLocalRandom;
-
 @Slf4j
 @SpringBootApplication
 @RequiredArgsConstructor
 public class Application implements CommandLineRunner {
 
-    private final InvoiceProducer producer;
+    private final SingleActiveProducer producer;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -26,11 +20,8 @@ public class Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        for (int i = 0; i < 200; i++) {
-            var invoiceNumber = "INV-" + (i % 60);
-            var invoice = new InvoiceCreatedMessage(ThreadLocalRandom.current().nextInt(200), LocalDate.now(), "USD", invoiceNumber);
-            producer.sendInvoiceCreated(invoice);
-        }
+        producer.sendDummy();
+        log.info("Done");
     }
 
 

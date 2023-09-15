@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalTime;
 
 @Data
-@Service
+//@Service
 public class MultiplePrefetchProducer {
 
     @Autowired
