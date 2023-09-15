@@ -1,5 +1,7 @@
 package com.parom.rabbitmq.two;
 
+import com.parom.rabbitmq.two.entity.DummyMessage;
+import com.parom.rabbitmq.two.producer.ReliableProducer;
 import com.parom.rabbitmq.two.producer.SingleActiveProducer;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +14,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @RequiredArgsConstructor
 public class Application implements CommandLineRunner {
 
-    private final SingleActiveProducer producer;
+    private final ReliableProducer producer;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -20,7 +22,11 @@ public class Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        producer.sendDummy();
+        var dummyMessage1 = new DummyMessage("Invalid test", 10);
+        var dummyMessage2 = new DummyMessage("Invalid test", 20);
+
+        producer.sendDummyWithInvalidRoutingKey(dummyMessage1);
+        producer.sendDummyWithInvalidExchange(dummyMessage2);
         log.info("Done");
     }
 
