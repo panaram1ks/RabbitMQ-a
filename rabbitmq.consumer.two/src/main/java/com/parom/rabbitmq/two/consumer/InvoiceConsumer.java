@@ -14,8 +14,8 @@ import java.time.LocalDate;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Slf4j
-@Service
-@RabbitListener(queues = "q.invoice")
+//@Service
+//@RabbitListener(queues = "q.invoice")
 public class InvoiceConsumer {
 
     @RabbitHandler
