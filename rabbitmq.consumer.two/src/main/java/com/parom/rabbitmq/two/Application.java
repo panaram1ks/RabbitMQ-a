@@ -1,4 +1,4 @@
-package com.parom.rabbitmq.consumer.two;
+package com.parom.rabbitmq.two;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
