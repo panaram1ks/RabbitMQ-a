@@ -22,11 +22,12 @@ public class Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        for (int i = 0; i < 10_000; i++){
+        for (int i = 0; i < 500; i++){
             var dummyMessage = new DummyMessage("Now is " + LocalTime.now(), i);
             producer.sendDummy(dummyMessage);
             TimeUnit.SECONDS.sleep(1);
         }
+        System.out.println("All sent");
 
     }
 }
