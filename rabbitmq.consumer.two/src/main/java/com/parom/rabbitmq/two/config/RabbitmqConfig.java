@@ -20,4 +20,46 @@ public class RabbitmqConfig {
         return new Jackson2JsonMessageConverter(objectMapper);
     }
 
+
+//    @Bean(name = "rabbitListenerContainerFactory")
+//    public SimpleRabbitListenerContainerFactory simpleRabbitListenerContainerFactory(
+//            SimpleRabbitListenerContainerFactoryConfigurer configurer, ConnectionFactory connectionFactory) {
+//        SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
+//        configurer.configure(factory, connectionFactory);
+//
+//        factory.setAfterReceivePostProcessors(new MessagePostProcessor() {
+//
+//            @Override
+//            public Message postProcessMessage(Message message) throws AmqpException {
+//                var type = message.getMessageProperties().getHeaders().get("type").toString();
+//                String typeId = null;
+//
+//                if (StringUtils.equalsIgnoreCase(type, "invoice.paid")) {
+//                    typeId = InvoicePaidMessage.class.getName();
+//                } else if (StringUtils.equalsIgnoreCase(type, "invoice.created")) {
+//                    typeId = InvoiceCreatedMessage.class.getName();
+//                }
+//
+//                Optional.ofNullable(typeId).ifPresent(t -> message.getMessageProperties().setHeader("__TypeId__", t));
+//
+//                return message;
+//            }
+//
+//        });
+//
+//        return factory;
+//    }
+//
+//    @Bean
+//    Jackson2JsonMessageConverter jsonMessageConverter() {
+//        return new Jackson2JsonMessageConverter();
+//    }
+//
+//    @Bean
+//    RabbitTemplate rabbitTemplate(Jackson2JsonMessageConverter converter, ConnectionFactory connectionFactory) {
+//        RabbitTemplate template = new RabbitTemplate(connectionFactory);
+//        template.setMessageConverter(new Jackson2JsonMessageConverter());
+//        return template;
+//    }
+
 }
