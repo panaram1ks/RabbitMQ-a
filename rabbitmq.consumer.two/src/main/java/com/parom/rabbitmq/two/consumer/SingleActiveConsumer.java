@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
-@Service
+//@Service
 public class SingleActiveConsumer {
 
     @RabbitListener(queues = "q.single", concurrency = "5")

@@ -1,6 +1,8 @@
 package com.parom.rabbitmq.two;
 
 import com.parom.rabbitmq.two.entity.DummyMessage;
+import com.parom.rabbitmq.two.entity.InvoiceCancelledMessage;
+import com.parom.rabbitmq.two.producer.InvoiceProducer;
 import com.parom.rabbitmq.two.producer.ReliableProducer;
 import com.parom.rabbitmq.two.producer.SingleActiveProducer;
 import lombok.RequiredArgsConstructor;
@@ -9,12 +11,14 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.time.LocalDate;
+
 @Slf4j
 @SpringBootApplication
 @RequiredArgsConstructor
 public class Application implements CommandLineRunner {
 
-    private final ReliableProducer producer;
+    private final InvoiceProducer producer;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -22,11 +26,11 @@ public class Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        var dummyMessage1 = new DummyMessage("Invalid test", 10);
-        var dummyMessage2 = new DummyMessage("Invalid test", 20);
-
-        producer.sendDummyWithInvalidRoutingKey(dummyMessage1);
-        producer.sendDummyWithInvalidExchange(dummyMessage2);
+        for (int i = 0; i < 10; i++) {
+            var invoiceNumber = "INV-" + i;
+            var invoiceCancelledMessage = new InvoiceCancelledMessage(LocalDate.now(), invoiceNumber, "Test " + i);
+            producer.sendInvoiceCancelled(invoiceCancelledMessage);
+        }
         log.info("Done");
     }
 
