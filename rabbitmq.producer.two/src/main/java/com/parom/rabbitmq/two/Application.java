@@ -26,20 +26,30 @@ public class Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-
-        var randomInvoiceNumber = "INV-" + ThreadLocalRandom.current().nextInt(100, 200);
-        var invoiceCreateMessage = new InvoiceCreatedMessage(152.26, LocalDate.now().minusDays(2), "USD", randomInvoiceNumber);
-        producer.sendInvoiceCreated(invoiceCreateMessage);
-
-        randomInvoiceNumber = "INV-" + ThreadLocalRandom.current().nextInt(200, 300);
-        var randomPaymentNumber = "PAY-" + ThreadLocalRandom.current().nextInt(800, 1000);
-        var invoicePaidMessage = new InvoicePaidMessage(randomInvoiceNumber, LocalDate.now(), randomPaymentNumber);
-        producer.sendInvoicePaid(invoicePaidMessage);
-
-        randomInvoiceNumber = "INV-" + ThreadLocalRandom.current().nextInt(300, 400);
-        var invoiceCancelledMessage = new InvoiceCancelledMessage(LocalDate.now(), randomInvoiceNumber, "Just a test");
-        producer.sendInvoiceCancelled(invoiceCancelledMessage);
-
-        log.info("Done");
+        for (int i = 0; i < 200; i++) {
+            var invoiceNumber = "INV-" + (i % 60);
+            var invoice = new InvoiceCreatedMessage(ThreadLocalRandom.current().nextInt(200), LocalDate.now(), "USD", invoiceNumber);
+            producer.sendInvoiceCreated(invoice);
+        }
     }
+
+
+//    @Override
+//    public void run(String... args) throws Exception {
+//
+//        var randomInvoiceNumber = "INV-" + ThreadLocalRandom.current().nextInt(100, 200);
+//        var invoiceCreateMessage = new InvoiceCreatedMessage(152.26, LocalDate.now().minusDays(2), "USD", randomInvoiceNumber);
+//        producer.sendInvoiceCreated(invoiceCreateMessage);
+//
+//        randomInvoiceNumber = "INV-" + ThreadLocalRandom.current().nextInt(200, 300);
+//        var randomPaymentNumber = "PAY-" + ThreadLocalRandom.current().nextInt(800, 1000);
+//        var invoicePaidMessage = new InvoicePaidMessage(randomInvoiceNumber, LocalDate.now(), randomPaymentNumber);
+//        producer.sendInvoicePaid(invoicePaidMessage);
+//
+//        randomInvoiceNumber = "INV-" + ThreadLocalRandom.current().nextInt(300, 400);
+//        var invoiceCancelledMessage = new InvoiceCancelledMessage(LocalDate.now(), randomInvoiceNumber, "Just a test");
+//        producer.sendInvoiceCancelled(invoiceCancelledMessage);
+//
+//        log.info("Done");
+//    }
 }
