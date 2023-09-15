@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.time.LocalTime;
+import java.util.concurrent.TimeUnit;
 
 @SpringBootApplication
 @RequiredArgsConstructor
@@ -21,7 +22,11 @@ public class Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        var dummyMessage = new DummyMessage("Now is " + LocalTime.now(), 1);
-        producer.sendDummy(dummyMessage);
+        for (int i = 0; i < 10_000; i++){
+            var dummyMessage = new DummyMessage("Now is " + LocalTime.now(), i);
+            producer.sendDummy(dummyMessage);
+            TimeUnit.SECONDS.sleep(1);
+        }
+
     }
 }
